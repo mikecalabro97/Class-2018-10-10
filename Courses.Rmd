@@ -1,0 +1,33 @@
+---
+title: "class 2018-10-10"
+author: "Mike Calabro"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(devtools)
+Fall_2018 <- read_csv("class_enrollment_summary_by_term_10.10.18 (1).csv")
+Fall_2017 <- read_csv("class_enrollment_summary_by_term_10.20.17.csv")
+```
+```{r}
+Fall_2017 %>%
+  select(`Course Title`, `Course Name`, `Course Department`, `UGrad`) %>%
+  filter(! is.na(`Course Title`)) %>%
+  arrange(desc(`UGrad`))
+
+Fall_2018 %>%
+  select(`Course Title`, `Course Name`, `Course Department`, `UGrad`) %>%
+  filter(! is.na(`Course Title`)) %>%
+  arrange(desc(`UGrad`))
+
+```
+```{r}
+Fall_2018 %>%
+  filter(! `Course ID` %in% Fall_2017$`Course ID`) %>%
+  filter(! is.na(`Course Title`)) %>%
+  select(`Course Title`, `Course Name`, `Course Department`, `UGrad`) %>%
+  arrange(desc(`UGrad`))
+```
+
